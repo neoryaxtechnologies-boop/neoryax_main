@@ -1,0 +1,252 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-grid: var(--grid);
+  --color-terminal-green: var(--terminal-green);
+  --color-terminal-amber: var(--terminal-amber);
+  --color-terminal-red: var(--terminal-red);
+}
+
+:root {
+  /* Terminal Web3 dark palette */
+  --background: oklch(0.04 0 0);          /* #050505 */
+  --foreground: oklch(0.92 0.005 200);
+  --card: oklch(0.06 0 0);
+  --card-foreground: oklch(0.92 0.005 200);
+  --popover: oklch(0.06 0 0);
+  --popover-foreground: oklch(0.92 0.005 200);
+
+  /* Cyan accent */
+  --primary: oklch(0.82 0.16 200);        /* electric cyan */
+  --primary-foreground: oklch(0.04 0 0);
+  --primary-glow: oklch(0.88 0.18 200);
+
+  --secondary: oklch(0.12 0.005 200);
+  --secondary-foreground: oklch(0.92 0.005 200);
+
+  --muted: oklch(0.10 0.005 200);
+  --muted-foreground: oklch(0.55 0.01 200);
+
+  --accent: oklch(0.18 0.04 200);
+  --accent-foreground: oklch(0.92 0.16 200);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.18 0.01 200);
+  --input: oklch(0.10 0.005 200);
+  --ring: oklch(0.82 0.16 200);
+
+  --grid: oklch(0.14 0.01 200 / 0.5);
+  --terminal-green: oklch(0.78 0.18 145);
+  --terminal-amber: oklch(0.82 0.15 75);
+  --terminal-red: oklch(0.65 0.22 25);
+
+  --gradient-axis: radial-gradient(circle at center, oklch(0.82 0.16 200 / 0.18), transparent 60%);
+  --gradient-glow: linear-gradient(135deg, oklch(0.82 0.16 200 / 0.4), transparent 70%);
+  --shadow-cyan: 0 0 24px oklch(0.82 0.16 200 / 0.3);
+  --shadow-cyan-lg: 0 0 60px oklch(0.82 0.16 200 / 0.45);
+
+  --radius: 0px;
+}
+
+.dark {
+  --background: oklch(0.04 0 0);
+  --foreground: oklch(0.92 0.005 200);
+  --card: oklch(0.06 0 0);
+  --card-foreground: oklch(0.92 0.005 200);
+  --popover: oklch(0.06 0 0);
+  --popover-foreground: oklch(0.92 0.005 200);
+  --primary: oklch(0.82 0.16 200);
+  --primary-foreground: oklch(0.04 0 0);
+  --secondary: oklch(0.12 0.005 200);
+  --secondary-foreground: oklch(0.92 0.005 200);
+  --muted: oklch(0.10 0.005 200);
+  --muted-foreground: oklch(0.55 0.01 200);
+  --accent: oklch(0.18 0.04 200);
+  --accent-foreground: oklch(0.92 0.16 200);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.18 0.01 200);
+  --input: oklch(0.10 0.005 200);
+  --ring: oklch(0.82 0.16 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Cyan caret + scrollbar */
+  * { caret-color: var(--primary); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--background); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+}
+
+/* ---------- Terminal / Web3 utility layer ---------- */
+@layer components {
+  /* Background grid */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-grid-sm {
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Noise overlay */
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Vignette + axis glow background */
+  .axis-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-axis);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Terminal-style card */
+  .term-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .term-card::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 12px; height: 12px;
+    border-top: 1px solid var(--primary);
+    border-left: 1px solid var(--primary);
+  }
+  .term-card::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 12px; height: 12px;
+    border-bottom: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+  }
+
+  /* Terminal prompt */
+  .term-prompt::before {
+    content: "$ ";
+    color: var(--terminal-green);
+  }
+
+  .blink-caret::after {
+    content: "▊";
+    color: var(--primary);
+    margin-left: 2px;
+    animation: caret-blink 1s steps(1) infinite;
+  }
+
+  @keyframes caret-blink {
+    50% { opacity: 0; }
+  }
+
+  /* Glow text */
+  .glow-text {
+    text-shadow: 0 0 12px oklch(0.82 0.16 200 / 0.6);
+  }
+
+  /* Rotating axis */
+  .axis-rotate {
+    animation: axis-spin 40s linear infinite;
+    transform-origin: center;
+  }
+  .axis-rotate-rev {
+    animation: axis-spin 60s linear infinite reverse;
+    transform-origin: center;
+  }
+
+  @keyframes axis-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .scan-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+    opacity: 0.2;
+    animation: scan-line 6s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Marquee */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+}
